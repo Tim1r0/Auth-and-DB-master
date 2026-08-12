@@ -4,6 +4,7 @@ from .base import Base
 
 if TYPE_CHECKING:
     from .post import Post
+    from .refreshtoken import RefreshToken
 class User(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(unique=True, index=True)
@@ -11,3 +12,4 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(default=True, server_default='true')
 
     posts: Mapped[list['Post']] = relationship(back_populates='author')
+    token: Mapped['RefreshToken'] = relationship(back_populates='user')
