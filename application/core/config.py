@@ -10,7 +10,7 @@ class RunConfig(BaseModel):
 
 class AuthPrefix(BaseModel):
     prefix: str = '/auth'
-    register: str = '/register'
+    register_path: str = '/register_path'
 
 class AuthJWT(BaseModel):
     private_key_path: Path = BASE_DIR / 'cert' / 'jwt-private.pem'

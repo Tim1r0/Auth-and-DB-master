@@ -12,4 +12,4 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(default=True, server_default='true')
 
     posts: Mapped[list['Post']] = relationship(back_populates='author')
-    token: Mapped['RefreshToken'] = relationship(back_populates='user')
+    token: Mapped[list['RefreshToken']] = relationship(back_populates='user')

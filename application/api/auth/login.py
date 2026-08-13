@@ -11,7 +11,6 @@ from core.models import db_helper
 from crud import save_refresh_token, get_user_by_email
 
 router = APIRouter(
-    prefix=settings.api.auth.prefix,
     tags=['auth'],
 )
 

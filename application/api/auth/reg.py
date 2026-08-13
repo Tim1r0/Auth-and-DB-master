@@ -10,7 +10,7 @@ from core.models import db_helper
 from crud import get_user_by_email, create_user
 
 router = APIRouter(
-    prefix=settings.api.auth.register,
+    prefix=settings.api.auth.register_path,
 )
 
 @router.post('', response_model=UserRead)

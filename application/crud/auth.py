@@ -1,6 +1,6 @@
 from datetime import datetime, timezone, timedelta
 
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.models import RefreshToken
@@ -25,7 +25,19 @@ async def get_refresh_token(
     session: AsyncSession,
     token: str
 ) -> RefreshToken | None:
-    stmt = select(RefreshToken).where(RefreshToken.token == token)
+    now = int(datetime.now(timezone.utc).timestamp())
+    stmt = select(RefreshToken).where(
+        RefreshToken.token == token,
+        RefreshToken.expires_at > now
+    )
     result = await session.execute(stmt)
     return result.scalar_one_or_none()
+
+async def delete_refresh_token(
+        session: AsyncSession,
+        token: str,
+):
+    stmt = delete(RefreshToken).where(RefreshToken.token == token)
+    await session.execute(stmt)
+    await session.commit()
 

@@ -68,7 +68,7 @@ def create_tokens(user_id: int, email: str):
 
     refresh_jwt = encode_jwt(
         payload=refresh_payload,
-        expire_timedelta=timedelta(days=30)
+        expire_timedelta=timedelta(minutes=settings.auth_jwt.refresh_token_expires_min),
     )
 
     return access_jwt, refresh_jwt
