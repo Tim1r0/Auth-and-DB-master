@@ -16,6 +16,8 @@ class AuthJWT(BaseModel):
     private_key_path: Path = BASE_DIR / 'cert' / 'jwt-private.pem'
     public_key_path: Path = BASE_DIR / 'cert' / 'jwt-public.pem'
     algorithm: str = 'RS256'
+    access_token_expires_min: int = 15
+    refresh_token_expires_min: int = 30
 
 class ApiPrefix(BaseModel):
     prefix: str = '/api'
